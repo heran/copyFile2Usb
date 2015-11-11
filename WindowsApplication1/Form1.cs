@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Collections.Specialized;
 using System.Runtime.InteropServices;
+using System.Resources;
 
 namespace WindowsApplication1
 {
@@ -229,7 +230,7 @@ namespace WindowsApplication1
             this.Operate = new operate_menu(this.listView1, this.imagelist);
             USB = new ImageList();
             USB.ImageSize=new Size(16,16);
-            USB.Images.Add(Bitmap.FromFile(Application.StartupPath+"\\Usb.ico"));
+            USB.Images.Add(Properties.Resources.Usb);
             this.lbEnUSB.LargeImageList = USB;
             RefreshDir();//检测可用U盘
             addUSBSubMenu();
@@ -281,7 +282,7 @@ namespace WindowsApplication1
                 if (File.Exists(ss))
                     imagelist.Images.Add(Icon.ExtractAssociatedIcon(ss));
                 else
-                    imagelist.Images.Add(Bitmap.FromFile(Application.StartupPath + "\\folder.ico"));
+                    imagelist.Images.Add(Properties.Resources.folder);
             }
             if(listView1.LargeImageList==null)
                   listView1.LargeImageList = imagelist;
@@ -517,7 +518,7 @@ namespace WindowsApplication1
                 if (File.Exists(ss))
                     imagelist.Images.Add(Icon.ExtractAssociatedIcon(ss));
                 else
-                    imagelist.Images.Add(Bitmap.FromFile(Application.StartupPath + "\\folder.ico"));
+                    imagelist.Images.Add(Properties.Resources.folder);
             }
             listView1.LargeImageList = imagelist;
             foreach (string s in str)
@@ -606,7 +607,7 @@ namespace WindowsApplication1
             path = folder_browser.SelectedPath;
             if (path == "")
                 return;
-            imagelist.Images.Add(Bitmap.FromFile(Application.StartupPath + "\\folder.ico"));
+            imagelist.Images.Add(Properties.Resources.folder);
             if(listView1.LargeImageList==null)
                listView1.LargeImageList =imagelist;
             ListViewItem listviewitem = new ListViewItem(path.Substring(path.LastIndexOf('\\')+1),imagelist.Images.Count-1);
