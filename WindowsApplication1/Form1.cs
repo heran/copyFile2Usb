@@ -100,7 +100,7 @@ namespace WindowsApplication1
                                 lbInOutUSB.Items.Add("U盘：【" + oldDrives[oldDrives.Length - 1].Name + "】已插入" + "(" + DateTime.Now.ToShortTimeString() + ")");
                                 lbInOutUSB.SelectedIndex = lbInOutUSB.Items.Count - 1;
                                 FilePath = getObjectPaths(listView1);
-                                   newThreadCopy(FilePath ,Value);
+                                newThreadCopy(FilePath, Value, clear.Checked);
                             }
                             addUSBSubMenu();
                             break;
@@ -146,11 +146,11 @@ namespace WindowsApplication1
                 }
             }
         }
-        public void newThreadCopy(string[] file_path,string value)
+        public void newThreadCopy(string[] file_path,string value, bool clear)
         {
             string Value= value;
             string[] File_Path = file_path;
-            CopyFileToUSB COPY_THREAD = new CopyFileToUSB(File_Path, Value);
+            CopyFileToUSB COPY_THREAD = new CopyFileToUSB(File_Path, Value, clear);
             COPY_THREAD.Show_CopyInfo = new CopyFileToUSB.show_CopyInfo(Show_CopyInfo);
             COPY_THREAD.parent_lab_showinfo = new CopyFileToUSB.parent_lab_showInfo(lab_showInfo);
             thread = new Thread(new ThreadStart(COPY_THREAD.Copy));
@@ -562,7 +562,7 @@ namespace WindowsApplication1
             ToolStripItem item = sender as ToolStripItem;
             USB_Root=item.Text.Substring(item.Text.LastIndexOf('|')+1);
             if ((Drives = get_selObjectPaths(listView1)) != null)
-                newThreadCopy(Drives, USB_Root.Substring(0,2));
+                newThreadCopy(Drives, USB_Root.Substring(0,2), clear.Checked);
             
         }
         public delegate void ProGrBar();
@@ -653,6 +653,11 @@ namespace WindowsApplication1
         }
 
         private void contextMenuStrip2_Opening(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
 
         }

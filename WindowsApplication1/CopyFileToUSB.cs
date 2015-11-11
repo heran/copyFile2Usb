@@ -13,6 +13,7 @@ namespace WindowsApplication1
         DriveInfo USBinfo;
        // bool can_PraBar=false ;
         string[] SourcePaths;
+        bool clear = false;
         public int FilesCount = 0;
         public filesCount_paths doFilesCount;
         public delegate void StepProgressBar(); 
@@ -28,13 +29,43 @@ namespace WindowsApplication1
         /// </summary>
         /// <param name="listview">用以获取文件路径列表视图</param>
         /// <param name="USBboot">要复制的目标盘</param>
-        public CopyFileToUSB(string[] SourcePaths, string USBboot)
+        /// <param name="clear">是否删除U盘原有文件</param>
+        public CopyFileToUSB(string[] SourcePaths, string USBboot, bool clear)
         {
             doFilesCount = new filesCount_paths(SourcePaths);
             this.SourcePaths = SourcePaths;
+            this.clear = clear;
             USBinfo = new DriveInfo(USBboot.Substring(0, 1));
             CopyInfo = "【" + USBinfo.Name + "盘_" + USBinfo.VolumeLabel + "】"; 
         }
+
+        /// <summary>
+        /// 清空指定的文件夹，但不删除文件夹
+        /// </summary>
+        /// <param name="dir"></param>
+        public static void DeleteFolder(string dir)
+        {
+            foreach (string d in Directory.GetFileSystemEntries(dir))
+            {
+                if (File.Exists(d))
+                {
+                    FileInfo fi = new FileInfo(d);
+                    if (fi.Attributes.ToString().IndexOf("ReadOnly") != -1)
+                        fi.Attributes = FileAttributes.Normal;
+                    File.Delete(d);//直接删除其中的文件  
+                }
+                else
+                {
+                    DirectoryInfo d1 = new DirectoryInfo(d);
+                    if (d1.GetFiles().Length != 0)
+                    {
+                        DeleteFolder(d1.FullName);////递归删除子文件夹
+                    }
+                    Directory.Delete(d);
+                }
+            }
+        }
+
         /// <summary>
         /// FielName，要复制文件名,若目标文件己存在，则覆盖
         /// </summary>
@@ -49,6 +80,13 @@ namespace WindowsApplication1
                 }
                 else
                 {
+                    if (this.clear)
+                    {
+                        //删掉U盘原有文件
+                        DeleteFolder(USBinfo.Name);
+                        Show_CopyInfo(CopyInfo + "已删除U盘原有文件");
+                        
+                    }
                     FILES_COUNT = doFilesCount.FilesCountPaths();
                     if (FILES_COUNT == 0) return;
                     Show_CopyInfo(CopyInfo + "正在复制....");

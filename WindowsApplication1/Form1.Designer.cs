@@ -57,6 +57,7 @@
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
             this.listView1 = new System.Windows.Forms.ListView();
+            this.clear = new System.Windows.Forms.RadioButton();
             this.contextMenuStrip1.SuspendLayout();
             this.contextMenuStrip2.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -112,13 +113,13 @@
             this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.退出EToolStripMenuItem});
             this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(153, 48);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(116, 26);
             this.contextMenuStrip2.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip2_Opening);
             // 
             // 退出EToolStripMenuItem
             // 
             this.退出EToolStripMenuItem.Name = "退出EToolStripMenuItem";
-            this.退出EToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.退出EToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
             this.退出EToolStripMenuItem.Text = "退出(&E)";
             this.退出EToolStripMenuItem.Click += new System.EventHandler(this.退出EToolStripMenuItem_Click);
             // 
@@ -324,7 +325,7 @@
             this.listView1.ContextMenuStrip = this.contextMenuStrip1;
             this.listView1.Location = new System.Drawing.Point(0, 38);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(531, 450);
+            this.listView1.Size = new System.Drawing.Size(531, 382);
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
@@ -332,12 +333,24 @@
             this.listView1.DragEnter += new System.Windows.Forms.DragEventHandler(this.listView1_DragEnter);
             this.listView1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseDown);
             // 
+            // clear
+            // 
+            this.clear.AutoSize = true;
+            this.clear.Location = new System.Drawing.Point(13, 433);
+            this.clear.Name = "clear";
+            this.clear.Size = new System.Drawing.Size(113, 16);
+            this.clear.TabIndex = 7;
+            this.clear.Text = "删除U盘原有文件";
+            this.clear.UseVisualStyleBackColor = true;
+            this.clear.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(800, 496);
+            this.Controls.Add(this.clear);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox5);
@@ -392,6 +405,7 @@
         private System.Windows.Forms.ToolStripButton toolStripButton6;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ToolStripButton toolStripButton7;
+        private System.Windows.Forms.RadioButton clear;
     }
 }
 
