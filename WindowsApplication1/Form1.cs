@@ -651,5 +651,10 @@ namespace WindowsApplication1
                 this.notifyIcon1.Visible = false;
             }
         }
+
+        private void contextMenuStrip2_Opening(object sender, CancelEventArgs e)
+        {
+
+        }
     }
 }
